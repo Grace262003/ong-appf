@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONG APPF – Agir pour la Promotion et la Protection de la Famille</title>
+<link rel="icon" type="image/jpeg" href="ong_appf.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8963E;
+    --gold-light: #E8B96A;
+    --gold-pale: #F5E8CF;
+    --earth: #3D2B1F;
+    --earth-mid: #6B4A35;
+    --cream: #FAF6EF;
+    --green: #3A6B4A;
+    --green-light: #5A8F67;
+    --rose: #C4664A;
+    --white: #FFFFFF;
+    --text: #2C1F14;
+    --text-soft: #7A6555;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,246,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,150,62,0.15);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(61,43,31,0.08); }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.9rem;
+  }
+  .nav-logo-emblem {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--gold), var(--earth-mid));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; letter-spacing: 0.02em;
+    box-shadow: 0 2px 12px rgba(200,150,62,0.3);
+  }
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--earth); line-height: 1.2;
+  }
+  .nav-logo-sub { font-size: 0.68rem; color: var(--gold); font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .nav-links {
+    display: flex; gap: 2.4rem; list-style: none;
+    font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .nav-links a { text-decoration: none; color: var(--earth-mid); transition: color 0.2s; font-weight: 500; }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    padding: 0.6rem 1.6rem;
+    background: var(--gold);
+    color: white; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 14px rgba(200,150,62,0.25);
+  }
+  .nav-cta:hover { background: var(--earth); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(61,43,31,0.2); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, var(--cream) 55%, var(--gold-pale) 100%);
+    z-index: 0;
+  }
+
+  .hero-pattern {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 55%;
+    z-index: 1;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(200,150,62,0.12) 0%, transparent 60%),
+      radial-gradient(circle at 30% 80%, rgba(58,107,74,0.08) 0%, transparent 50%);
+    overflow: hidden;
+  }
+  .hero-pattern::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200,150,62,0.04) 40px, rgba(200,150,62,0.04) 41px),
+      repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(200,150,62,0.04) 40px, rgba(200,150,62,0.04) 41px);
+  }
+
+  .hero-left {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 4rem;
+    animation: fadeInUp 1s ease both;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 1.8rem;
+  }
+  .hero-badge::before {
+    content: ''; width: 28px; height: 1px; background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    line-height: 1.1; font-weight: 300; color: var(--earth);
+    margin-bottom: 1.6rem;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+
+  .hero-desc {
+    font-size: 1.02rem; line-height: 1.8; color: var(--text-soft);
+    max-width: 480px; margin-bottom: 2.8rem; font-weight: 300;
+  }
+
+  .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    padding: 1rem 2.4rem;
+    background: var(--gold);
+    color: white; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.25s; box-shadow: 0 4px 20px rgba(200,150,62,0.3);
+  }
+  .btn-primary:hover { background: var(--earth); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(61,43,31,0.2); }
+
+  .btn-outline {
+    padding: 1rem 2.4rem;
+    background: transparent; color: var(--earth);
+    border: 1.5px solid var(--earth-mid); border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { background: var(--earth); color: white; }
+
+  .hero-stats {
+    margin-top: 3.5rem; display: flex; gap: 2.5rem; flex-wrap: wrap;
+    padding-top: 2.5rem; border-top: 1px solid rgba(200,150,62,0.2);
+    animation: fadeInUp 1s 0.3s ease both;
+  }
+  .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--gold); line-height: 1;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.07em; }
+
+  .hero-right {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    padding: 5rem 4rem 5rem 2rem;
+    animation: fadeInRight 1s 0.2s ease both;
+  }
+
+  .hero-image-wrap {
+    position: relative; width: 100%; max-width: 480px;
+  }
+  .hero-img-bg {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(160deg, var(--gold-pale), var(--gold-light));
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+    box-shadow: 0 20px 60px rgba(61,43,31,0.15);
+  }
+  .hero-img-bg::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(58,107,74,0.15) 0%, transparent 60%),
+      radial-gradient(circle at 80% 20%, rgba(200,150,62,0.2) 0%, transparent 50%);
+  }
+  .hero-illustration {
+    width: 80%; height: 80%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .hero-card-float {
+    position: absolute;
+    background: white; border-radius: 3px;
+    padding: 1rem 1.4rem;
+    box-shadow: 0 8px 30px rgba(61,43,31,0.12);
+    animation: float 4s ease-in-out infinite;
+  }
+  .hero-card-float.card-1 {
+    bottom: -1.5rem; left: -2rem;
+    animation-delay: 0s;
+  }
+  .hero-card-float.card-2 {
+    top: 2rem; right: -2rem;
+    animation-delay: 2s;
+  }
+  .card-icon { font-size: 1.4rem; margin-bottom: 0.2rem; }
+  .card-text { font-size: 0.75rem; font-weight: 500; color: var(--earth); }
+  .card-sub { font-size: 0.65rem; color: var(--text-soft); }
+
+  /* ---- MISSION ---- */
+  .mission {
+    padding: 8rem 4rem;
+    background: var(--earth);
+    position: relative; overflow: hidden;
+  }
+  .mission::before {
+    content: ''; position: absolute; top: -50%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(200,150,62,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .mission-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .section-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); font-weight: 500; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+
+  .mission-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300; color: var(--cream); line-height: 1.2;
+    margin-bottom: 1.4rem;
+  }
+  .mission-title em { font-style: italic; color: var(--gold-light); }
+  .mission-text { color: rgba(250,246,239,0.7); line-height: 1.85; font-size: 0.98rem; font-weight: 300; margin-bottom: 2rem; }
+
+  .mission-pillars {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .pillar {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    padding: 1.4rem; border-left: 2px solid var(--gold);
+    background: rgba(200,150,62,0.05);
+    transition: background 0.3s;
+  }
+  .pillar:hover { background: rgba(200,150,62,0.1); }
+  .pillar-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(200,150,62,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .pillar-title { font-weight: 500; color: var(--cream); font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .pillar-desc { font-size: 0.82rem; color: rgba(250,246,239,0.55); line-height: 1.6; }
+
+  /* ---- PROGRAMS ---- */
+  .programs {
+    padding: 8rem 4rem;
+    background: var(--cream);
+  }
+  .programs-header { text-align: center; max-width: 600px; margin: 0 auto 4.5rem; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; color: var(--earth); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc { color: var(--text-soft); line-height: 1.8; font-size: 0.95rem; font-weight: 300; }
+
+  .programs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+  }
+  .program-card {
+    background: white; border-radius: 2px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 2px 20px rgba(61,43,31,0.06);
+    transition: all 0.35s; position: relative; overflow: hidden;
+    border-bottom: 3px solid transparent;
+    cursor: default;
+  }
+  .program-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .program-card.green::before { background: var(--green); }
+  .program-card.gold::before { background: var(--gold); }
+  .program-card.rose::before { background: var(--rose); }
+
+  .program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(61,43,31,0.1); }
+  .program-card:hover::before { transform: scaleX(1); }
+
+  .program-icon {
+    width: 56px; height: 56px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 1.5rem;
+  }
+  .program-card.green .program-icon { background: rgba(58,107,74,0.1); }
+  .program-card.gold .program-icon { background: rgba(200,150,62,0.1); }
+  .program-card.rose .program-icon { background: rgba(196,102,74,0.1); }
+
+  .program-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem; font-weight: 600; color: var(--earth);
+    margin-bottom: 0.8rem; line-height: 1.3;
+  }
+  .program-text { color: var(--text-soft); font-size: 0.88rem; line-height: 1.75; font-weight: 300; }
+
+  /* ---- IMPACT ---- */
+  .impact {
+    padding: 7rem 4rem;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, #EDD9B5 100%);
+    position: relative;
+  }
+  .impact-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .impact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; color: var(--earth); margin-bottom: 0.8rem;
+  }
+  .impact-subtitle { color: var(--earth-mid); font-size: 0.95rem; margin-bottom: 4rem; font-weight: 300; }
+
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .impact-item {
+    background: white; padding: 2.2rem 1.5rem; border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(61,43,31,0.06);
+    transition: transform 0.25s;
+  }
+  .impact-item:hover { transform: translateY(-3px); }
+  .impact-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 600; color: var(--gold); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .impact-label { font-size: 0.78rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.07em; line-height: 1.5; }
+
+  /* ---- DONATE ---- */
+  .donate {
+    padding: 8rem 4rem;
+    background: white;
+  }
+  .donate-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+  }
+  .donate-left {}
+  .donate-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; color: var(--earth);
+    line-height: 1.2; margin-bottom: 1.2rem;
+  }
+  .donate-title em { font-style: italic; color: var(--gold); }
+  .donate-text { color: var(--text-soft); line-height: 1.85; font-size: 0.95rem; margin-bottom: 2rem; font-weight: 300; }
+
+  .trust-items { display: flex; flex-direction: column; gap: 0.9rem; }
+  .trust-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.87rem; color: var(--text-soft);
+  }
+  .trust-check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(58,107,74,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; color: var(--green); flex-shrink: 0;
+  }
+
+  .donate-form {
+    background: var(--cream); padding: 2.5rem;
+    border-radius: 3px; border: 1px solid rgba(200,150,62,0.2);
+  }
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; color: var(--earth);
+    margin-bottom: 0.4rem;
+  }
+  .form-sub { font-size: 0.82rem; color: var(--text-soft); margin-bottom: 2rem; }
+
+  .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin-bottom: 1.2rem; }
+  .amount-btn {
+    padding: 0.8rem; background: white; border: 1.5px solid #E2D5C5;
+    border-radius: 2px; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; color: var(--earth-mid);
+    cursor: pointer; transition: all 0.2s; text-align: center;
+  }
+  .amount-btn:hover, .amount-btn.active {
+    border-color: var(--gold); color: var(--gold);
+    background: rgba(200,150,62,0.05);
+  }
+  .amount-sub { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; font-weight: 400; display: block; color: var(--text-soft); margin-top: 0.1rem; }
+
+  .form-input {
+    width: 100%; padding: 0.9rem 1rem; margin-bottom: 1rem;
+    background: white; border: 1.5px solid #E2D5C5; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text);
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .form-input::placeholder { color: #B8A898; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+  .btn-donate {
+    width: 100%; padding: 1.1rem;
+    background: linear-gradient(135deg, var(--gold), #A87830);
+    color: white; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.25s;
+    box-shadow: 0 4px 20px rgba(200,150,62,0.35);
+    margin-top: 0.5rem;
+  }
+  .btn-donate:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,150,62,0.4); }
+
+  .secure-badge {
+    text-align: center; margin-top: 1rem;
+    font-size: 0.72rem; color: var(--text-soft);
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  }
+
+  .payment-method-selector {
+    animation: fadeInUp 0.5s ease;
+  }
+
+  .payment-method-selector label:hover {
+    border-color: var(--gold);
+    background: rgba(200,150,62,0.05);
+  }
+
+  .payment-method-selector input[type="radio"] {
+    accent-color: var(--gold);
+  }
+
+  .payment-method-selector input[type="radio"]:checked + span {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  #customAmountDiv {
+    animation: fadeInUp 0.3s ease;
+  }
+
+  .btn-donate:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Payment method buttons */
+  .payment-method-btn {
+    padding: 1rem 1.5rem;
+    background: white;
+    border: 2px solid #E2D5C5;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--earth-mid);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .payment-method-btn:hover {
+    border-color: var(--gold);
+    background: rgba(200,150,62,0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(200,150,62,0.2);
+  }
+
+  .payment-method-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Modal styles */
+  .bank-transfer-modal,
+  .payment-success-modal,
+  .payment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .bank-modal-content,
+  .payment-success-content,
+  .payment-modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(61,43,31,0.25);
+    animation: slideUp 0.4s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bank-modal-content button:hover,
+  .payment-success-content button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(200,150,62,0.3);
+  }
+
+  .bank-modal-content code {
+    background: rgba(200,150,62,0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    word-break: break-all;
+  }
+
+  /* ---- TESTIMONIAL ---- */
+  .testimonial {
+    padding: 7rem 4rem;
+    background: var(--earth);
+  }
+  .testimonial-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem; color: var(--gold); line-height: 0.5;
+    margin-bottom: 1.5rem; display: block; opacity: 0.6;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem); font-style: italic;
+    color: var(--cream); line-height: 1.6; font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .quote-author { font-size: 0.82rem; color: var(--gold-light); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ---- CONTACT ---- */
+  .contact {
+    padding: 6rem 4rem;
+    background: var(--cream);
+  }
+  .contact-inner { max-width: 900px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; }
+
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+    font-weight: 600; color: var(--earth); margin-bottom: 1.5rem;
+  }
+  .contact-line { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.1rem; }
+  .contact-icon { font-size: 1rem; margin-top: 0.1rem; }
+  .contact-detail { font-size: 0.87rem; color: var(--text-soft); line-height: 1.6; }
+  .contact-detail strong { color: var(--earth); font-weight: 500; display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.1rem; }
+
+  .contact-form-section {}
+  .contact-form-section h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+    font-weight: 600; color: var(--earth); margin-bottom: 1.5rem;
+  }
+  .form-textarea {
+    width: 100%; padding: 0.9rem 1rem; height: 120px;
+    background: white; border: 1.5px solid #E2D5C5; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text);
+    outline: none; resize: vertical; transition: border-color 0.2s;
+    margin-bottom: 1rem;
+  }
+  .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea::placeholder { color: #B8A898; }
+
+  .btn-send {
+    padding: 0.9rem 2.2rem;
+    background: var(--earth); color: white; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-send:hover { background: var(--gold); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: #1E140D;
+    padding: 4rem 4rem 2.5rem;
+    color: rgba(250,246,239,0.5);
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+    padding-bottom: 3rem; border-bottom: 1px solid rgba(200,150,62,0.1);
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--cream); font-weight: 600; margin-bottom: 0.8rem;
+  }
+  .footer-brand-desc { font-size: 0.82rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold-light); font-weight: 500; margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a {
+    text-decoration: none; color: rgba(250,246,239,0.5);
+    font-size: 0.83rem; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+    font-size: 0.75rem;
+  }
+  .footer-love { color: rgba(250,246,239,0.35); }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---- SVG ILLUSTRATION ---- */
+  .family-svg { width: 100%; height: 100%; max-width: 340px; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    .hero-left { padding: 5rem 1.5rem 3rem; }
+    .mission-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .mission { padding: 5rem 1.5rem; }
+    .programs { padding: 5rem 1.5rem; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .impact { padding: 5rem 1.5rem; }
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+    .donate { padding: 5rem 1.5rem; }
+    .donate-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonial { padding: 5rem 1.5rem; }
+    .contact { padding: 5rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="ong_appf.jpg" alt="logo" class="nav-logo-emblem">
+    <div>
+      <div class="nav-logo-text">ONG APPF</div>
+      <div class="nav-logo-sub">Agir pour la Famille</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#mission">Notre Mission</a></li>
+    <li><a href="#programs">Programmes</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#donate" class="nav-cta">Faire un Don</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+
+  <div class="hero-left">
+    <div class="hero-badge">ONG APPF · Depuis 2010</div>
+    <h1 class="hero-title">
+      Protéger les familles,<br>
+      <em>construire l'avenir</em><br>
+      ensemble
+    </h1>
+    <p class="hero-desc">
+      L'ONG APPF œuvre pour le bien-être familial, lutte contre les violences faites aux femmes et aux enfants, et soutient l'éducation des filles pour des communautés plus fortes et plus justes.
+    </p>
+    <div class="hero-actions">
+      <a href="#donate" class="btn-primary">Soutenir notre cause</a>
+      <a href="#mission" class="btn-outline">Découvrir notre mission</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Familles soutenues</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">20</span>
+        <span class="stat-label">Filles scolarisées</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">12</span>
+        <span class="stat-label">Communautés</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-image-wrap">
+      <div class="hero-img-bg">
+        <div class="hero-illustration">
+          <!-- Family SVG Illustration -->
+          <svg class="family-svg" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background circles -->
+            <circle cx="150" cy="175" r="120" fill="rgba(200,150,62,0.08)"/>
+            <circle cx="150" cy="175" r="85" fill="rgba(200,150,62,0.06)"/>
+
+            <!-- Father -->
+            <circle cx="105" cy="130" r="26" fill="#C8963E" opacity="0.85"/>
+            <ellipse cx="105" cy="200" rx="32" ry="40" fill="#C8963E" opacity="0.7"/>
+            <!-- face -->
+            <circle cx="97" cy="127" r="3" fill="#3D2B1F" opacity="0.5"/>
+            <circle cx="113" cy="127" r="3" fill="#3D2B1F" opacity="0.5"/>
+            <path d="M 99 136 Q 105 141 111 136" stroke="#3D2B1F" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+            <!-- Mother -->
+            <circle cx="195" cy="128" r="26" fill="#E8B96A" opacity="0.85"/>
+            <ellipse cx="195" cy="198" rx="32" ry="40" fill="#E8B96A" opacity="0.7"/>
+            <!-- hair -->
+            <path d="M 169 118 Q 195 95 221 118" fill="#C8963E" opacity="0.6"/>
+            <!-- face -->
+            <circle cx="187" cy="125" r="3" fill="#3D2B1F" opacity="0.5"/>
+            <circle cx="203" cy="125" r="3" fill="#3D2B1F" opacity="0.5"/>
+            <path d="M 189 134 Q 195 139 201 134" stroke="#3D2B1F" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+            <!-- Child girl -->
+            <circle cx="150" cy="215" r="20" fill="#5A8F67" opacity="0.85"/>
+            <ellipse cx="150" cy="268" rx="22" ry="30" fill="#5A8F67" opacity="0.7"/>
+            <!-- dress shape -->
+            <path d="M 128 260 Q 150 290 172 260" fill="#3A6B4A" opacity="0.5"/>
+            <!-- face -->
+            <circle cx="144" cy="213" r="2.5" fill="#3D2B1F" opacity="0.5"/>
+            <circle cx="156" cy="213" r="2.5" fill="#3D2B1F" opacity="0.5"/>
+            <path d="M 146 221 Q 150 225 154 221" stroke="#3D2B1F" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <!-- pigtails -->
+            <circle cx="133" cy="205" r="7" fill="#5A8F67" opacity="0.5"/>
+            <circle cx="167" cy="205" r="7" fill="#5A8F67" opacity="0.5"/>
+
+            <!-- connecting arms suggestion -->
+            <path d="M 131 185 Q 150 215 169 185" stroke="#C8963E" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+
+            <!-- Stars/sparkles -->
+            <circle cx="70" cy="80" r="3" fill="#C8963E" opacity="0.4"/>
+            <circle cx="230" cy="75" r="2" fill="#E8B96A" opacity="0.5"/>
+            <circle cx="58" cy="240" r="2.5" fill="#5A8F67" opacity="0.4"/>
+            <circle cx="245" cy="250" r="2" fill="#C8963E" opacity="0.4"/>
+            <circle cx="150" cy="55" r="3" fill="#E8B96A" opacity="0.5"/>
+
+            <!-- Heart -->
+            <path d="M 148 68 C 148 66 145 63 141 65 C 137 67 137 72 141 76 L 148 83 L 155 76 C 159 72 159 67 155 65 C 151 63 148 66 148 68 Z" fill="#C4664A" opacity="0.6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-card-float card-1">
+        <div class="card-icon">🌸</div>
+        <div class="card-text">Sécurité familiale</div>
+        <div class="card-sub">Chaque famille protégée</div>
+      </div>
+      <div class="hero-card-float card-2">
+        <div class="card-icon">📚</div>
+        <div class="card-text">Éducation des filles</div>
+        <div class="card-sub">50 bénéficiaires</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="section-inner">
+    <div class="mission-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">Notre Mission</div>
+        <h2 class="mission-title">
+          Agir pour la dignité<br>
+          et le <em>bien-être</em> de chaque famille
+        </h2>
+        <p class="mission-text">
+          Fondée sur des valeurs de solidarité, de justice et d'égalité, l'ONG APPF intervient au cœur des communautés pour transformer les vies. Nous croyons que chaque femme, chaque enfant, chaque famille mérite de vivre dans la sécurité, la dignité et l'espoir.
+        </p>
+        <p class="mission-text">
+          À travers des programmes concrets et un accompagnement durable, nous construisons les fondations d'une société où les familles peuvent s'épanouir pleinement.
+        </p>
+      </div>
+      <div class="mission-pillars reveal">
+        <div class="pillar">
+          <div class="pillar-icon">👨‍👩‍👧</div>
+          <div>
+            <div class="pillar-title">Promotion du bien-être familial</div>
+            <div class="pillar-desc">Accompagnement psychosocial, médiation familiale et renforcement des liens au sein des foyers vulnérables.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🛡️</div>
+          <div>
+            <div class="pillar-title">Lutte contre les violences</div>
+            <div class="pillar-desc">Protection et soutien aux femmes et enfants victimes de violences à travers l'écoute, l'assistance juridique et les refuges.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📖</div>
+          <div>
+            <div class="pillar-title">Éducation des filles</div>
+            <div class="pillar-desc">Bourses scolaires, mentorat et sensibilisation pour garantir l'accès à l'éducation pour toutes les filles.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div>
+            <div class="pillar-title">Renforcement communautaire</div>
+            <div class="pillar-desc">Formation des leaders locaux et création de réseaux de soutien pour des communautés plus résilientes.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <div class="section-eyebrow" style="justify-content:center">Nos Programmes</div>
+    <h2 class="section-title">Des actions concrètes<br>pour un <em>changement durable</em></h2>
+    <p class="section-desc">Chaque programme est conçu pour répondre aux besoins réels des communautés, avec des résultats mesurables et un impact profond.</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card green reveal">
+      <div class="program-icon">🌿</div>
+      <div class="program-title">Espace d'Écoute et de Soutien</div>
+      <p class="program-text">Des centres d'accueil sécurisés où les femmes et enfants en détresse peuvent trouver aide psychologique, conseil juridique et orientation vers des services adaptés.</p>
+    </div>
+    <div class="program-card gold reveal">
+      <div class="program-icon">⭐</div>
+      <div class="program-title">Filles en Avant !</div>
+      <p class="program-text">Programme de bourses scolaires, de mentorat et de sensibilisation pour maintenir les filles à l'école et leur offrir un avenir professionnel plein de possibilités.</p>
+    </div>
+    <div class="program-card rose reveal">
+      <div class="program-icon">💛</div>
+      <div class="program-title">Foyers Sains, Familles Fortes</div>
+      <p class="program-text">Ateliers de parentalité positive, de gestion des conflits et de renforcement économique pour aider les familles à bâtir des bases solides et durables.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact" id="impact">
+  <div class="impact-inner">
+    <div class="reveal">
+      <div class="section-eyebrow" style="justify-content:center">Notre Impact</div>
+      <h2 class="impact-title">Des chiffres qui parlent,<br>des vies qui changent</h2>
+      <p class="impact-subtitle">Chaque année, grâce à vos dons et à notre équipe, nous transformons des centaines de vies.</p>
+    </div>
+    <div class="impact-grid reveal">
+      <div class="impact-item">
+        <div class="impact-num">50+</div>
+        <div class="impact-label">Familles accompagnées depuis 2010</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-num">20</div>
+        <div class="impact-label">Filles maintenues à l'école</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-num">20</div>
+        <div class="impact-label">Femmes protégées des violences</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-num">12</div>
+        <div class="impact-label">Communautés transformées</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section class="donate" id="donate">
+  <div class="donate-inner">
+    <div class="donate-left reveal">
+      <div class="section-eyebrow">Faire un Don</div>
+      <h2 class="donate-title">Votre générosité<br>change une <em>vie</em> aujourd'hui</h2>
+      <p class="donate-text">
+        Chaque don, quelle que soit sa taille, contribue directement à nos programmes sur le terrain. Votre soutien est la pierre angulaire de notre action. Ensemble, nous bâtissons des communautés plus sûres et plus équitables.
+      </p>
+      <div class="trust-items">
+        <div class="trust-item">
+          <div class="trust-check">✓</div>
+          <span>Organisation transparente – rapports annuels publiés</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">✓</div>
+          <span>Dons sécurisés et traçables</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">✓</div>
+          <span>85% des fonds vont directement aux bénéficiaires</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">✓</div>
+          <span>Reçu fiscal disponible sur demande</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-check">✓</div>
+          <span>Équipe dédiée et professionnelle depuis 2010</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="donate-form reveal">
+      <div class="form-title">Faire un don</div>
+      <div class="form-sub">Sélectionnez le montant - Le paiement se déclenche immédiatement</div>
+
+      <div id="paymentStep1">
+        <div class="amount-grid">
+          <button type="button" class="amount-btn" onclick="initiatePayment(5000)">
+            5 000 FCFA<span class="amount-sub">Fournitures scolaires</span>
+          </button>
+          <button type="button" class="amount-btn active" onclick="initiatePayment(10000)">
+            10 000 FCFA<span class="amount-sub">1 mois de scolarité</span>
+          </button>
+          <button type="button" class="amount-btn" onclick="initiatePayment(25000)">
+            25 000 FCFA<span class="amount-sub">Soutien familial</span>
+          </button>
+          <button type="button" class="amount-btn" onclick="initiatePayment(50000)">
+            50 000 FCFA<span class="amount-sub">Programme complet</span>
+          </button>
+          <button type="button" class="amount-btn" onclick="initiatePayment(100000)">
+            100 000 FCFA<span class="amount-sub">Impact majeur</span>
+          </button>
+          <button type="button" class="amount-btn" onclick="showCustomAmount()">
+            Autre<span class="amount-sub">Montant libre</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="customAmountStep" style="display: none;">
+        <input type="number" id="customAmount" class="form-input" placeholder="Entrez le montant en FCFA (minimum 1000)" min="1000" />
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1rem;">
+          <button type="button" class="btn-outline" onclick="goBack()" style="padding: 0.9rem 1.5rem;">← Retour</button>
+          <button type="button" class="btn-primary" onclick="confirmCustomAmount()" style="padding: 0.9rem 1.5rem;">Continuer →</button>
+        </div>
+      </div>
+
+      <div id="paymentMethodStep" style="display: none;">
+        <div style="margin-bottom: 1.5rem;">
+          <p style="font-size: 0.9rem; color: var(--text-soft); margin-bottom: 1rem;">Choisissez votre moyen de paiement préféré :</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+            <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('moov')" data-method="moov">
+              📱 MOOV Money
+            </button>
+            <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('mtn')" data-method="mtn">
+              📱 MTN Money
+            </button>
+            <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('celtis')" data-method="celtis">
+              📱 Celtis
+            </button>
+            <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('bank')" data-method="bank">
+              🏦 Virement Bancaire
+            </button>
+          </div>
+        </div>
+        <button type="button" class="btn-outline" onclick="goBack()" style="padding: 0.9rem 1.5rem; width: 100%;">← Retour</button>
+      </div>
+
+      <div class="secure-badge">
+        🔒 Paiement sécurisé · MOOV · MTN · Celtis · Virement bancaire
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-inner reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">
+      Grâce à l'APPF, ma fille a pu continuer ses études quand je n'en avais plus les moyens. Aujourd'hui elle prépare son baccalauréat. Vous m'avez rendu espoir en l'avenir.
+    </p>
+    <div class="quote-author">— Marie-Claire, mère bénéficiaire, Togba</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal" style="text-align:center; max-width:560px; margin:0 auto;">
+      <div class="section-eyebrow" style="justify-content:center">Nous Contacter</div>
+      <h2 class="section-title" style="font-size:2rem;">Ensemble, construisons<br>un <em>avenir meilleur</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Coordonnées</h3>
+        <div class="contact-line">
+          <span class="contact-icon">📍</span>
+          <div class="contact-detail">
+            <strong>Adresse</strong>
+            Abomey-Cakavi, Bénin — Quartier Togba
+          </div>
+        </div>
+        <div class="contact-line">
+          <span class="contact-icon">📞</span>
+          <div class="contact-detail">
+            <strong>Téléphone / WhatsApp</strong>
+            +229 00 00 00 00
+          </div>
+        </div>
+        <div class="contact-line">
+          <span class="contact-icon">✉️</span>
+          <div class="contact-detail">
+            <strong>Email</strong>
+            contact@ong-appf.org
+          </div>
+        </div>
+        <div class="contact-line">
+          <span class="contact-icon">🕐</span>
+          <div class="contact-detail">
+            <strong>Heures d'ouverture</strong>
+            Lundi – Vendredi : 8h00 – 17h00<br>Samedi : 9h00 – 13h00
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-section reveal">
+        <h3>Envoyer un message</h3>
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Votre nom" />
+          <input type="email" class="form-input" placeholder="Votre email" />
+        </div>
+        <textarea class="form-textarea" placeholder="Votre message..."></textarea>
+        <button class="btn-send">Envoyer →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">ONG APPF</div>
+        <p class="footer-brand-desc">Agir pour la Promotion et la Protection de la Famille. Ensemble pour des familles dignes, des femmes libres, et des enfants éduqués.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#mission">Notre Mission</a></li>
+          <li><a href="#programs">Programmes</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#donate">Faire un Don</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Actions</h4>
+        <ul>
+          <li><a href="#">Rapports annuels</a></li>
+          <li><a href="#">Devenir bénévole</a></li>
+          <li><a href="#">Partenariats</a></li>
+          <li><a href="#">Presse</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Suivez-nous</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ONG APPF — Tous droits réservés</span>
+      <span class="footer-love">Fait avec ❤️ pour les familles du Bénin</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Global payment state
+  let currentAmount = null;
+  
+  // Payment credentials
+  const PAYMENT_CONFIG = {
+    moov: {
+      phone: '+229 0195974585',
+      merchantId: 'ONG-APPF-BENIN',
+      merchantName: 'ONG APPF'
+    },
+    mtn: {
+      phone: '+229 0154639134',
+      merchantId: 'ONG-APPF-MTN',
+      merchantName: 'ONG APPF'
+    },
+    celtis: {
+      phone: '+229 0148769276',
+      merchantId: 'ONG-APPF-CELTIS',
+      merchantName: 'ONG APPF'
+    },
+    bank: {
+      iban: 'BJ90 CBVN 0000 0123 4567 8901 23',
+      bic: 'CBVNBJ22',
+      bankName: 'Société Générale Benin'
+    }
+  };
+
+  // Show custom amount input
+  function showCustomAmount() {
+    document.getElementById('paymentStep1').style.display = 'none';
+    document.getElementById('customAmountStep').style.display = 'block';
+    document.getElementById('customAmount').focus();
+  }
+
+  // Confirm custom amount and show payment methods
+  function confirmCustomAmount() {
+    const customAmount = document.getElementById('customAmount').value.trim();
+    if (!customAmount || parseInt(customAmount) < 1000) {
+      alert('❌ Veuillez entrer un montant valide (minimum 1000 FCFA)');
+      return;
+    }
+    currentAmount = parseInt(customAmount);
+    showPaymentMethods();
+  }
+
+  // Initiate payment - triggered when user clicks an amount button
+  function initiatePayment(amount) {
+    currentAmount = amount;
+    showPaymentMethods();
+  }
+
+  // Show payment method selection
+  function showPaymentMethods() {
+    document.getElementById('paymentStep1').style.display = 'none';
+    document.getElementById('customAmountStep').style.display = 'none';
+    document.getElementById('paymentMethodStep').style.display = 'block';
+    window.scrollTo({ top: document.querySelector('.donate-form').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  // Go back to amount selection
+  function goBack() {
+    document.getElementById('paymentStep1').style.display = 'block';
+    document.getElementById('customAmountStep').style.display = 'none';
+    document.getElementById('paymentMethodStep').style.display = 'none';
+    document.getElementById('customAmount').value = '';
+    currentAmount = null;
+  }
+
+  // Select payment method and trigger payment
+  function selectPaymentMethod(method) {
+    const btn = event.target.closest('.payment-method-btn');
+    
+    // Visual feedback
+    document.querySelectorAll('.payment-method-btn').forEach(b => b.style.opacity = '0.5');
+    btn.style.opacity = '1';
+    btn.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+      btn.style.transform = 'scale(1)';
+      processPayment(method, currentAmount);
+    }, 200);
+  }
+
+  // Process payment based on method selected
+  function processPayment(method, amount) {
+    const reference = 'APPF-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    const merchantId = 'ONG-APPF-BENIN';
+    
+    if (method === 'moov') {
+      initiateMoovPayment(amount, reference, merchantId);
+    } else if (method === 'mtn') {
+      initiateMtnPayment(amount, reference, merchantId);
+    } else if (method === 'celtis') {
+      initiateCeltisPayment(amount, reference, merchantId);
+    } else if (method === 'bank') {
+      showBankTransferInfo(amount, reference);
+    }
+  }
+
+  // MOOV Money Payment - Redirect to payment gateway
+  function initiateMoovPayment(amount, reference, merchantId) {
+    const moovPhone = PAYMENT_CONFIG.moov.phone.replace(/\s/g, '');
+    
+    // Create USSD redirect for MOOV (direct payment initiation)
+    // Format: *123*1*amount*receiver_phone*reference#
+    const ussdCode = `*123*1*${amount}*${moovPhone}*${reference}#`;
+    
+    // Try to open MOOV payment gateway
+    // Option 1: USSD redirect
+    window.location.href = `tel:${ussdCode}`;
+    
+    // Option 2: If USSD fails, show modal with instructions
+    setTimeout(() => {
+      showPaymentModal('MOOV Money', PAYMENT_CONFIG.moov.phone, amount, reference, 'moov');
+    }, 500);
+  }
+
+  // MTN Money Payment
+  function initiateMtnPayment(amount, reference, merchantId) {
+    const mtnPhone = PAYMENT_CONFIG.mtn.phone.replace(/\s/g, '');
+    
+    // MTN Mobile Money USSD code
+    // Format similar to MOOV
+    const ussdCode = `*156#`;
+    
+    window.location.href = `tel:${ussdCode}`;
+    
+    setTimeout(() => {
+      showPaymentModal('MTN Money', PAYMENT_CONFIG.mtn.phone, amount, reference, 'mtn');
+    }, 500);
+  }
+
+  // Celtis Payment
+  function initiateCeltisPayment(amount, reference, merchantId) {
+    const celtisPhone = PAYMENT_CONFIG.celtis.phone.replace(/\s/g, '');
+    
+    // Celtis USSD code
+    const ussdCode = `*135#`;
+    
+    window.location.href = `tel:${ussdCode}`;
+    
+    setTimeout(() => {
+      showPaymentModal('Celtis', PAYMENT_CONFIG.celtis.phone, amount, reference, 'celtis');
+    }, 500);
+  }
+
+  // Show bank transfer information
+  function showBankTransferInfo(amount, reference) {
+    // Store payment info for bank transfer
+    const paymentInfo = {
+      amount: amount,
+      reference: reference,
+      date: new Date().toLocaleDateString('fr-FR'),
+      time: new Date().toLocaleTimeString('fr-FR')
+    };
+    
+    localStorage.setItem('pendingDonation_' + reference, JSON.stringify(paymentInfo));
+    
+    // Create modal for bank transfer details
+    const modal = document.createElement('div');
+    modal.className = 'bank-transfer-modal';
+    modal.innerHTML = `
+      <div class="bank-modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--earth);">
+            🏦 Coordonnées Bancaires
+          </h3>
+          <button onclick="this.closest('.bank-transfer-modal').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+        </div>
+        
+        <div style="background: var(--gold-pale); padding: 1.5rem; border-radius: 3px; margin-bottom: 1.5rem;">
+          <p style="font-size: 0.75rem; color: var(--earth-mid); text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem;">Bénéficiaire</p>
+          <p style="font-size: 1.1rem; font-weight: 600; color: var(--earth); margin: 0;">ONG APPF - Benin</p>
+          
+          <p style="font-size: 0.75rem; color: var(--earth-mid); text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem; margin-top: 1rem;">IBAN</p>
+          <p style="font-size: 1rem; font-family: monospace; color: var(--earth); margin: 0; font-weight: 500;">BJ90 CBVN 0000 0123 4567 8901 23</p>
+          
+          <p style="font-size: 0.75rem; color: var(--earth-mid); text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem; margin-top: 1rem;">BIC</p>
+          <p style="font-size: 1rem; font-family: monospace; color: var(--earth); margin: 0; font-weight: 500;">CBVNBJ22</p>
+          
+          <p style="font-size: 0.75rem; color: var(--earth-mid); text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem; margin-top: 1rem;">Montant</p>
+          <p style="font-size: 1.2rem; font-weight: 600; color: var(--gold); margin: 0;">${amount.toLocaleString('fr-FR')} XOF</p>
+          
+          <p style="font-size: 0.75rem; color: var(--earth-mid); text-transform: uppercase; font-weight: 500; margin-bottom: 0.3rem; margin-top: 1rem;">Référence</p>
+          <p style="font-size: 0.9rem; font-family: monospace; color: var(--earth); margin: 0; word-break: break-all;">${reference}</p>
+        </div>
+        
+        <div style="background: #FFF8DC; padding: 1rem; border-left: 3px solid var(--gold); margin-bottom: 1.5rem; border-radius: 2px;">
+          <p style="margin: 0; font-size: 0.85rem; color: var(--earth-mid); line-height: 1.6;">
+            <strong>⚠️ Important :</strong> Veuillez inclure la référence dans le libellé du virement afin que nous puissions identifier votre donation.
+          </p>
+        </div>
+        
+        <button onclick="copyToClipboard('BJ90 CBVN 0000 0123 4567 8901 23'); this.textContent = '✓ Copié !'; setTimeout(() => this.textContent = '📋 Copier l\'IBAN', 2000);" 
+          style="width: 100%; padding: 0.9rem; background: var(--gold); color: white; border: none; border-radius: 2px; font-weight: 500; cursor: pointer; margin-bottom: 0.8rem; transition: background 0.2s;">
+          📋 Copier l'IBAN
+        </button>
+        
+        <button onclick="this.closest('.bank-transfer-modal').remove(); resetDonationForm();" 
+          style="width: 100%; padding: 0.9rem; background: var(--earth); color: white; border: none; border-radius: 2px; font-weight: 500; cursor: pointer; transition: background 0.2s;">
+          ✓ Fermer
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+  }
+
+  // Simulate payment processing (in production, this would call real API)
+  function simulatePaymentProcessing(method, amount, reference) {
+    // Store successful donation
+    const donation = {
+      method: method,
+      amount: amount,
+      reference: reference,
+      timestamp: new Date().toISOString()
+    };
+    
+    // Save to localStorage
+    let donations = JSON.parse(localStorage.getItem('donations') || '[]');
+    donations.push(donation);
+    localStorage.setItem('donations', JSON.stringify(donations));
+    
+    // Show success modal
+    const modal = document.createElement('div');
+    modal.className = 'payment-success-modal';
+    modal.innerHTML = `
+      <div class="payment-success-content">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+        <h2 style="margin: 0 0 0.5rem 0; font-family: 'Cormorant Garamond', serif; color: var(--earth);">Paiement lancé !</h2>
+        <p style="margin: 0 0 1.5rem 0; color: var(--text-soft); font-size: 0.95rem;">
+          Vous allez être redirigé vers ${method} pour finaliser votre donation.
+        </p>
+        
+        <div style="background: var(--cream); padding: 1.5rem; border-radius: 3px; margin-bottom: 1.5rem; text-align: left;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+            <span style="color: var(--text-soft); font-size: 0.9rem;">Montant :</span>
+            <strong style="color: var(--gold); font-size: 1rem;">${amount.toLocaleString('fr-FR')} XOF</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
+            <span style="color: var(--text-soft); font-size: 0.9rem;">Moyen :</span>
+            <strong style="color: var(--earth); font-size: 0.95rem;">${method}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: var(--text-soft); font-size: 0.9rem;">Référence :</span>
+            <code style="color: var(--earth); font-size: 0.85rem; font-weight: 500;">${reference}</code>
+          </div>
+        </div>
+        
+        <button onclick="this.closest('.payment-success-modal').remove(); resetDonationForm();" 
+          style="width: 100%; padding: 1rem; background: var(--gold); color: white; border: none; border-radius: 2px; font-weight: 500; cursor: pointer; font-size: 0.95rem;">
+          Fermer
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Auto-redirect after 3 seconds (in production, would redirect to payment gateway)
+    setTimeout(() => {
+      // Simulate API call to payment gateway
+      console.log('Redirecting to payment gateway for:', method, amount, reference);
+      // window.location.href = paymentGatewayUrl; // Uncomment in production
+    }, 3000);
+  }
+
+  // Show payment modal with instructions
+  function showPaymentModal(method, phone, amount, reference, methodType) {
+    // Create dynamic instructions based on payment method
+    let instructions = '';
+    let appName = method;
+    
+    if (methodType === 'moov') {
+      instructions = `
+        <strong>Instructions :</strong>
+        <ol style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-soft); line-height: 1.8; font-size: 0.9rem;">
+          <li>Ouvrez l'application <strong>MOOV Money</strong> sur votre téléphone</li>
+          <li>Allez à <strong>"Envoyer de l'argent"</strong> ou <strong>"Paiement"</strong></li>
+          <li>Sélectionnez <strong>"Transfert national"</strong></li>
+          <li>Entrez le numéro: <code style="background: rgba(200,150,62,0.2); padding: 0.3rem 0.6rem; border-radius: 2px;"><strong>${phone}</strong></code></li>
+          <li>Montant: <strong>${amount.toLocaleString('fr-FR')} XOF</strong></li>
+          <li>Libellé/Référence: <code style="background: rgba(200,150,62,0.2); padding: 0.3rem 0.6rem; border-radius: 2px;"><strong>${reference}</strong></code></li>
+          <li>Cliquez sur <strong>"Envoyer"</strong> et validez avec votre code PIN MOOV</li>
+        </ol>
+      `;
+    } else if (methodType === 'mtn') {
+      instructions = `
+        <strong>Instructions :</strong>
+        <ol style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-soft); line-height: 1.8; font-size: 0.9rem;">
+          <li>Ouvrez l'application <strong>MTN Money</strong> sur votre téléphone</li>
+          <li>Appuyez sur <strong>"Envoyer de l'argent"</strong></li>
+          <li>Sélectionnez <strong>"Transfert vers un marchand"</strong></li>
+          <li>Entrez le numéro: <code style="background: rgba(200,150,62,0.2); padding: 0.3rem 0.6rem; border-radius: 2px;"><strong>${phone}</strong></code></li>
+          <li>Montant: <strong>${amount.toLocaleString('fr-FR')} XOF</strong></li>
+          <li>Référence: <code style="background: rgba(200,150,62,0.2); padding: 0.3rem 0.6rem; border-radius: 2px;"><strong>${reference}</strong></code></li>
+          <li>Validez et entrez votre PIN MTN Money</li>
+        </ol>
+      `;
+    } else if (methodType === 'celtis') {
+      instructions = `
+        <strong>Instructions :</strong>
+        <ol style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-soft); line-height: 1.8; font-size: 0.9rem;">
+          <li>Ouvrez l'application <strong>Celtis</strong> sur votre téléphone</li>
+          <li>Sélectionnez <strong>"Effectuer un paiement"</strong></li>
+          <li>Entrez le numéro du bénéficiaire: <code style="background: rgba(200,150,62,0.2); padding: 0.3rem 0.6rem; border-radius: 2px;"><strong>${phone}</strong></code></li>
+          <li>Montant: <strong>${amount.toLocaleString('fr-FR')} XOF</strong></li>
+          <li>Référence: <code style="background: rgba(200,150,62,0.2); padding: 0.3rem 0.6rem; border-radius: 2px;"><strong>${reference}</strong></code></li>
+          <li>Confirmez et validez la transaction</li>
+        </ol>
+      `;
+    }
+    
+    const modal = document.createElement('div');
+    modal.className = 'payment-modal';
+    modal.innerHTML = `
+      <div class="payment-modal-content">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">✅</div>
+          <h2 style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--earth);">
+            Paiement lancé !
+          </h2>
+          <p style="margin: 0.5rem 0 0 0; color: var(--text-soft); font-size: 0.95rem;">
+            Validez sur votre téléphone dans l'app <strong>${appName}</strong>
+          </p>
+        </div>
+        
+        <div style="background: var(--cream); padding: 1.5rem; border-radius: 3px; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(200,150,62,0.2);">
+            <span style="color: var(--text-soft); font-size: 0.9rem;">Montant :</span>
+            <strong style="color: var(--gold); font-size: 1.2rem;">${amount.toLocaleString('fr-FR')} XOF</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span style="color: var(--text-soft); font-size: 0.9rem;">Moyen :</span>
+            <strong style="color: var(--earth); font-size: 0.95rem;">${method}</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <span style="color: var(--text-soft); font-size: 0.9rem;">Référence :</span>
+            <code style="color: var(--earth); font-size: 0.8rem; font-weight: 500; text-align: right; word-break: break-all;">${reference}</code>
+          </div>
+        </div>
+
+        <div style="background: #FFF3CD; border-left: 4px solid #FFC107; padding: 1rem; border-radius: 2px; margin-bottom: 1.5rem;">
+          ${instructions}
+        </div>
+        
+        <div style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem; border-radius: 2px; margin-bottom: 1.5rem; font-size: 0.9rem; color: #2E7D32;">
+          <strong>💡 Conseil :</strong> Gardez votre app ouverte. Vous serez redirigé automatiquement après validation du paiement.
+        </div>
+        
+        <button onclick="this.closest('.payment-modal').remove(); resetDonationForm();" 
+          style="width: 100%; padding: 1rem; background: var(--earth); color: white; border: none; border-radius: 2px; font-weight: 500; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;">
+          J'ai validé sur mon téléphone ✓
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+  }
+
+  // Copy to clipboard helper
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).catch(err => console.error('Copy failed:', err));
+  }
+
+  // Reset donation form
+  function resetDonationForm() {
+    document.getElementById('paymentStep1').style.display = 'block';
+    document.getElementById('paymentMethodStep').style.display = 'none';
+    document.getElementById('customAmountStep').style.display = 'none';
+    document.querySelectorAll('.amount-btn').forEach(b => b.style.opacity = '');
+    document.querySelectorAll('.amount-btn')[1].classList.add('active');
+    currentAmount = null;
+  }
+
+  // Contact form submission (unchanged)
+  document.addEventListener('DOMContentLoaded', function() {
+    const btnSend = document.querySelector('.btn-send');
+    if (btnSend) {
+      btnSend.addEventListener('click', () => {
+        alert('Message envoyé ! Nous vous répondrons dans les 24 heures. Merci de votre intérêt pour l\'ONG APPF.');
+      });
+    }
+  });
+
+  // Contact form
+  document.querySelector('.btn-send').addEventListener('click', () => {
+    alert('Message envoyé ! Nous vous répondrons dans les 24 heures. Merci de votre intérêt pour l\'ONG APPF.');
+  });
+</script>
+</body>
+</html>
