@@ -441,8 +441,17 @@
   .contact-detail{ font-size: 0.87rem; color: var(--text-soft); line-height: 1.6; }
   .contact-detail strong { color: var(--earth); font-weight: 500; display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.1rem; }
   .contact-form-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--earth); margin-bottom: 1.5rem; }
-  .btn-send { padding: 0.9rem 2.2rem; background: var(--earth); color: white; border: none; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
-  .btn-send:hover { background: var(--gold); }
+  /* ---- Bouton WhatsApp ---- */
+  .btn-whatsapp {
+    width: 100%; padding: 1rem 1.5rem;
+    background: #25D366; color: white; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 500;
+    letter-spacing: 0.03em; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+    transition: all 0.25s; box-shadow: 0 4px 18px rgba(37,211,102,0.3);
+  }
+  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+  .btn-whatsapp:active { transform: scale(0.98); }
 
   /* ============================================================
      FOOTER
@@ -749,12 +758,30 @@
       <div class="contact-form-section reveal">
         <h3>Envoyer un message</h3>
         <div class="form-row">
-          <input type="text"  id="ct-nom"   class="form-input" placeholder="Votre nom">
-          <input type="email" id="ct-email" class="form-input" placeholder="Votre email">
+          <input type="text"  id="ct-nom"   class="form-input" placeholder="Votre nom *">
+          <input type="tel"   id="ct-tel"   class="form-input" placeholder="Votre téléphone">
         </div>
-        <textarea id="ct-msg" class="form-textarea" placeholder="Votre message…"></textarea>
-        <button class="btn-send" onclick="sendContact()">Envoyer →</button>
-        <div id="ct-result" style="margin-top:0.8rem; font-size:0.85rem; display:none;"></div>
+        <input type="email" id="ct-email" class="form-input" placeholder="Votre email *">
+        <textarea id="ct-msg" class="form-textarea" placeholder="Votre message… *"></textarea>
+
+        <!-- Bouton principal WhatsApp -->
+        <button class="btn-whatsapp" onclick="sendContact()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Envoyer via WhatsApp
+        </button>
+
+        <!-- Lien alternatif direct -->
+        <div style="text-align:center; margin-top:0.9rem;">
+          <span style="font-size:0.78rem; color:var(--text-soft);">Ou contactez-nous directement → </span>
+          <a id="wa-direct-link" href="https://wa.me/22901959745853" target="_blank"
+             style="font-size:0.78rem; color:var(--gold); font-weight:500; text-decoration:none;">
+            Ouvrir WhatsApp ↗
+          </a>
+        </div>
+
+        <div id="ct-result" style="margin-top:0.9rem; font-size:0.85rem; display:none;"></div>
       </div>
     </div>
   </div>
@@ -1079,22 +1106,66 @@
     copyText(info, btn);
   }
 
-  /* ---- Contact ---- */
+  /* ---- Contact WhatsApp ---- */
+
+  /* Numéro WhatsApp de l'ONG — format international sans + ni espaces */
+  const WA_NUMBER = '2290154639134';
+
   function sendContact() {
     const nom   = document.getElementById('ct-nom').value.trim();
     const email = document.getElementById('ct-email').value.trim();
+    const tel   = document.getElementById('ct-tel').value.trim();
     const msg   = document.getElementById('ct-msg').value.trim();
     const res   = document.getElementById('ct-result');
-    if (!nom || !email || !msg) {
-      res.style.display = 'block'; res.style.color = 'var(--rose)';
-      res.textContent = 'Veuillez remplir tous les champs.'; return;
+
+    /* Validation */
+    if (!nom || !msg) {
+      res.style.display = 'block';
+      res.style.color   = 'var(--rose)';
+      res.textContent   = '⚠️ Veuillez renseigner au moins votre nom et votre message.';
+      return;
     }
-    res.style.display = 'block'; res.style.color = 'var(--green)';
-    res.textContent = '✓ Message envoyé ! Nous vous répondrons sous 24 heures. Merci !';
-    document.getElementById('ct-nom').value = '';
-    document.getElementById('ct-email').value = '';
-    document.getElementById('ct-msg').value = '';
+
+    /* Construction du message WhatsApp */
+    const date = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+    const heure = new Date().toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+
+    let texte = '';
+    texte += `*Nouveau message — Site ONG APPF*\n`;
+    texte += `━━━━━━━━━━━━━━━━━━━━\n`;
+    texte += `*Nom :* ${nom}\n`;
+    if (email) texte += `*Email :* ${email}\n`;
+    if (tel)   texte += `*Téléphone :* ${tel}\n`;
+    texte += `*Date :* ${date} à ${heure}\n`;
+    texte += `━━━━━━━━━━━━━━━━━━━━\n`;
+    texte += `*Message :*\n${msg}\n`;
+    texte += `━━━━━━━━━━━━━━━━━━━━\n`;
+    texte += `_Envoyé depuis le site ong-appf.org_`;
+
+    /* Encodage URL */
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(texte)}`;
+
+    /* Ouvrir WhatsApp */
+    window.open(url, '_blank');
+
+    /* Confirmation visuelle */
+    res.style.display = 'block';
+    res.style.color   = 'var(--green)';
+    res.textContent   = 'WhatsApp s\'est ouvert ! Appuyez sur "Envoyer" dans l\'application pour transmettre votre message à l\'ONG APPF.';
+
+    /* Vider le formulaire après 2 secondes */
+    setTimeout(() => {
+      document.getElementById('ct-nom').value   = '';
+      document.getElementById('ct-email').value = '';
+      document.getElementById('ct-tel').value   = '';
+      document.getElementById('ct-msg').value   = '';
+    }, 2000);
   }
+
+  /* Lien direct WhatsApp (sans formulaire) */
+  document.getElementById('wa-direct-link').href =
+    `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Bonjour ONG APPF, je vous contacte depuis votre site internet.')}`;
+
 
   /* ---- Utilitaires ---- */
   function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
